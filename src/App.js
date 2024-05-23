@@ -1,23 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react'
 
 function App() {
+  const [user, setUser] = useState(null)
+
+  useEffect(() => {
+    const BASE_URL = 'https://vercel-express-deploy-tutorial.vercel.app'
+    fetch(`${BASE_URL}/user`, {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        method: 'POST',
+        body: JSON.stringify({
+            name: "react",
+            email: "react@gmail.com",
+            userId: "react",
+            password: "react123@"  
+        })
+    })
+    .then(res => res.json())
+    .then(result => {
+      console.log(result)
+      setUser(result.newUser)
+    })
+  }, [])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {user ? (
+        <>
+          <h1>회원정보</h1>
+          <p>이름: {user.name}</p>
+          <p>연락처: {user.email}</p>
+          <p>아이디: {user.userId}</p>
+        </>
+      ) : "사용자정보 조회중..."}
     </div>
   );
 }
