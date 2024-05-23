@@ -4,8 +4,9 @@ function App() {
   const [user, setUser] = useState(null)
 
   useEffect(() => {
-    const BASE_URL = 'https://vercel-express-deploy-tutorial.vercel.app'
-    fetch(`${BASE_URL}/user`, {
+    console.log('서버주소: ', process.env.REACT_APP_BASE_URL)
+
+    fetch(`${process.env.REACT_APP_BASE_URL}/user`, {
         headers: {
             'Content-Type': 'application/json'
         },
