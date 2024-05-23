@@ -4,7 +4,7 @@ function App() {
   const [user, setUser] = useState(null)
 
   useEffect(() => {
-    console.log('서버주소: ', process.env.REACT_APP_BASE_URL)
+    console.log('서버주소 @: ', process.env.REACT_APP_BASE_URL)
 
     fetch(`${process.env.REACT_APP_BASE_URL}/user`, {
         headers: {
